@@ -7,9 +7,6 @@
       "ESNext",
       "DOM"
     ],
-    "types": [
-      "node"
-    ],
     "strict": true,
     "skipLibCheck": true
   },

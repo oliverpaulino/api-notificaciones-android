@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { handle } from "hono/vercel"
 import { Hono } from 'hono'
 import { cert, getApps, initializeApp } from 'firebase-admin/app'

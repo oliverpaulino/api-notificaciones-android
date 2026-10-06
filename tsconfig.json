@@ -1,7 +1,14 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "NodeNext",
+    "module": "esnext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "types": [
+      "node"
+    ],
     "strict": true,
     "verbatimModuleSyntax": true,
     "skipLibCheck": true,
@@ -10,6 +17,9 @@
     "rootDir": "./src",
     "outDir": "./dist"
   },
+  "include": [
+    "**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

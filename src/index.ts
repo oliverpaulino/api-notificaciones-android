@@ -1,18 +1,22 @@
-import { serve } from '@hono/node-server'
+import { handle } from "hono/vercel"
 import { Hono } from 'hono'
 import { cert, getApps, initializeApp } from 'firebase-admin/app'
 import { getMessaging } from 'firebase-admin/messaging'
 
 // 1. Inicializar Firebase Admin con tu llave
-import serviceAccount from '../serviceKey.json' with { type: 'json' }
-
 if (!getApps().length) {
+  if (!process.env.FIREBASE_CREDS) {
+    throw new Error("Falta la variable FIREBASE_CREDS en Vercel");
+  }
+
+  const serviceAccount = JSON.parse(process.env.FIREBASE_CREDS);
+
   initializeApp({
-    credential: cert(serviceAccount as import('firebase-admin').ServiceAccount)
+    credential: cert(serviceAccount)
   });
 }
 
-const app = new Hono()
+const app = new Hono().basePath('/api')
 
 app.post('/notificar', async (c) => {
   try {
@@ -43,13 +47,4 @@ app.post('/notificar', async (c) => {
       error: error instanceof Error ? error.message : String(error)
     }, 500)
   }
-})
-
-const port = 3000
-console.log(`Servidor Hono corriendo en el puerto ${port}`)
-
-serve({
-  fetch: app.fetch,
-  port,
-  hostname: '10.0.0.141'
 })

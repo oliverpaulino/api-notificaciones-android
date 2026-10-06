@@ -17,7 +17,7 @@ if (!getApps().length) {
   });
 }
 
-const app = new Hono().basePath('/api')
+const app = new Hono()
 
 app.post('/notificar', async (c) => {
   try {
@@ -50,4 +50,4 @@ app.post('/notificar', async (c) => {
   }
 })
 
-export default handle(app)
+export default app

@@ -49,3 +49,5 @@ app.post('/notificar', async (c) => {
     }, 500)
   }
 })
+
+export default handle(app)
